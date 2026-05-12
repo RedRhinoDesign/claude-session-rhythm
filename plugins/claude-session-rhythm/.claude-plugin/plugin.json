@@ -1,6 +1,6 @@
 {
   "name": "claude-session-rhythm",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Session management for Claude Code: 7 skills + 11 slash commands that maintain a project doc bundle (HANDOFF, SESSION_LOG, LESSONS, DECISIONS, BACKLOG, GOTCHAS) — so Claude picks up exactly where it left off across breaks, context switches, and parallel agents.",
   "author": {
     "name": "Caleb Joye"
