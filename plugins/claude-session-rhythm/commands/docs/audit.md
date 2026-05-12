@@ -24,7 +24,7 @@ Output a markdown table:
 |---|---|---|---|---|---|---|---|
 
 After the table, add a section **"Recommended action per project"**:
-- Projects missing 3+ files: suggest running `/docs:init` in that folder.
+- Projects missing 3+ files: suggest running `/claude-session-rhythm:docs:init` in that folder.
 - Projects missing 1–2 files: list the specific files and offer to create them.
 - Projects with all seven: mark ✅ fully covered.
 

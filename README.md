@@ -37,7 +37,7 @@ Or, while developing locally, point the marketplace at a clone:
 
 That's it. Restart Claude Code if a slash command doesn't appear in autocomplete immediately.
 
-> **Note:** copy-pasting the `plugins/claude-session-rhythm/skills/` and `plugins/claude-session-rhythm/commands/` folders into `~/.claude/` also works, but the marketplace install is the recommended path. `/session:guide` assumes marketplace-style installation when categorizing plugin vs. personal skills — see `GOTCHAS.md` for the edge case.
+> **Note:** copy-pasting the `plugins/claude-session-rhythm/skills/` and `plugins/claude-session-rhythm/commands/` folders into `~/.claude/` also works, but the marketplace install is the recommended path. If you copy-paste install, drop the `claude-session-rhythm:` prefix from every command shown below — e.g. `/session:start` instead of `/claude-session-rhythm:session:start`. `/claude-session-rhythm:session:guide` assumes marketplace-style installation when categorizing plugin vs. personal skills — see `GOTCHAS.md` for the edge case.
 
 ## Slash commands
 
@@ -45,17 +45,17 @@ All commands are namespaced. Type `/` in Claude Code and they'll autocomplete wi
 
 | Command | What it does |
 | --- | --- |
-| `/session:start [focus]` | Begin a new `SESSION_LOG.md` entry for today's work. |
-| `/session:end` | Close out the current session entry — what shipped, what's next. |
-| `/session:resume` | Read the most recent `SESSION_LOG.md` entry and reorient. |
-| `/session:guide` | Show the full Session Rhythm workflow guide, grouped by stage. |
-| `/handoff:create` | Write a full `HANDOFF.md` snapshot for a real context switch. |
-| `/handoff:quick` | Five-line `HANDOFF.md` for a small wrap (<30 min away). |
-| `/handoff:resume` | Read `HANDOFF.md`, drift-check, and orient for continued work. |
-| `/lessons:add` | Append a timestamped lesson to `LESSONS.md`. |
-| `/decision:add` | Append a lightweight ADR entry to `DECISIONS.md`. |
-| `/docs:init` | Scaffold the Session Rhythm doc bundle in this project — `LESSONS.md`, `SESSION_LOG.md`, `HANDOFF.md`, `DECISIONS.md`, `BACKLOG.md`, `GOTCHAS.md`, and a project-level `CLAUDE.md` if missing. Confirms before writing; never overwrites. |
-| `/docs:audit` | Audit doc-bundle coverage across a directory of projects — shows which of the seven standard docs each project has and what's missing. Read-only. |
+| `/claude-session-rhythm:session:start [focus]` | Begin a new `SESSION_LOG.md` entry for today's work. |
+| `/claude-session-rhythm:session:end` | Close out the current session entry — what shipped, what's next. |
+| `/claude-session-rhythm:session:resume` | Read the most recent `SESSION_LOG.md` entry and reorient. |
+| `/claude-session-rhythm:session:guide` | Show the full Session Rhythm workflow guide, grouped by stage. |
+| `/claude-session-rhythm:handoff:create` | Write a full `HANDOFF.md` snapshot for a real context switch. |
+| `/claude-session-rhythm:handoff:quick` | Five-line `HANDOFF.md` for a small wrap (<30 min away). |
+| `/claude-session-rhythm:handoff:resume` | Read `HANDOFF.md`, drift-check, and orient for continued work. |
+| `/claude-session-rhythm:lessons:add` | Append a timestamped lesson to `LESSONS.md`. |
+| `/claude-session-rhythm:decision:add` | Append a lightweight ADR entry to `DECISIONS.md`. |
+| `/claude-session-rhythm:docs:init` | Scaffold the Session Rhythm doc bundle in this project — `LESSONS.md`, `SESSION_LOG.md`, `HANDOFF.md`, `DECISIONS.md`, `BACKLOG.md`, `GOTCHAS.md`, and a project-level `CLAUDE.md` if missing. Confirms before writing; never overwrites. |
+| `/claude-session-rhythm:docs:audit` | Audit doc-bundle coverage across a directory of projects — shows which of the seven standard docs each project has and what's missing. Read-only. |
 
 ## Skills
 
@@ -80,7 +80,7 @@ A typical project rhythm looks like this:
 ### First time in a project
 
 ```text
-/docs:init
+/claude-session-rhythm:docs:init
 ```
 
 Scaffolds the doc bundle in the current project root: `LESSONS.md`, `SESSION_LOG.md`, `HANDOFF.md`, `DECISIONS.md`, `BACKLOG.md`, `GOTCHAS.md`, and a project-level `CLAUDE.md` if one doesn't already exist. Each file is created with a minimal seed header — they're meant to be lived in, not finished documents. The skill skips any file that already exists (never overwrites) and asks one question along the way: solo workflow or parallel-agent/team workflow? That determines whether `HANDOFF.md` is gitignored (solo) or committed (parallel-agent — it's the literal medium of handoff).
@@ -88,10 +88,10 @@ Scaffolds the doc bundle in the current project root: `LESSONS.md`, `SESSION_LOG
 ### Starting a focused session
 
 ```text
-/session:start "wiring stripe checkout"
+/claude-session-rhythm:session:start "wiring stripe checkout"
 ```
 
-Adds a dated entry at the top of `SESSION_LOG.md`. If a `HANDOFF.md` already exists, Claude will offer to `/handoff:resume` first — take it; that's the cheapest way to load context.
+Adds a dated entry at the top of `SESSION_LOG.md`. If a `HANDOFF.md` already exists, Claude will offer to `/claude-session-rhythm:handoff:resume` first — take it; that's the cheapest way to load context.
 
 ### Mid-session
 
@@ -100,24 +100,24 @@ Just work. Claude will *offer* to log a lesson, capture a decision, or update th
 If you want to drive it explicitly:
 
 ```text
-/lessons:add "vercel env vars don't hot-reload — restart dev server after editing .env.local"
-/decision:add
+/claude-session-rhythm:lessons:add "vercel env vars don't hot-reload — restart dev server after editing .env.local"
+/claude-session-rhythm:decision:add
 ```
 
 ### Before a break, context switch, or Conductor worktree
 
 ```text
-/handoff:create
+/claude-session-rhythm:handoff:create
 ```
 
-Writes a full `HANDOFF.md`: goal, what works, what's broken, failed approaches (loudly — so they don't get retried), next steps, resume commands. For tiny wraps (<30 min away), use `/handoff:quick` instead.
+Writes a full `HANDOFF.md`: goal, what works, what's broken, failed approaches (loudly — so they don't get retried), next steps, resume commands. For tiny wraps (<30 min away), use `/claude-session-rhythm:handoff:quick` instead.
 
 ### Picking up next time
 
 Open Claude Code in the project. If `HANDOFF.md` exists, Claude will proactively offer to read it. Or:
 
 ```text
-/handoff:resume
+/claude-session-rhythm:handoff:resume
 ```
 
 This reads the handoff, drift-checks against the current working tree, surfaces failed approaches loudly, and asks before running any resume commands.
@@ -152,7 +152,7 @@ README, local install test, then `git init` + push.
 ## Failed approaches (DO NOT REPEAT)
 
 - Enumerating skill/command names in plugin.json — not in the spec
-- Hardcoding a plugin-skill allow-list in /session:guide
+- Hardcoding a plugin-skill allow-list in /claude-session-rhythm:session:guide
 
 ## Next steps
 
@@ -199,17 +199,17 @@ A few choices that are deliberate, not accidental:
 
 - **`HANDOFF.md` is one file, overwritten every time.** History lives in `SESSION_LOG.md`. Two files, two jobs — don't merge them.
 - **Newest at the top, always.** Dated entries, no chronological hunting.
-- **Gitignore the doc bundle by default.** This project does — see `.gitignore`. The doc bundle is most useful as personal/team operational notes, not a public-facing artifact. Reverse it per-project if your team wants them committed; just pick one and stay consistent. (`/docs:init`'s solo-vs-parallel-agent question handles `HANDOFF.md` specifically, since it's the one file whose role flips between the two modes.)
+- **Gitignore the doc bundle by default.** This project does — see `.gitignore`. The doc bundle is most useful as personal/team operational notes, not a public-facing artifact. Reverse it per-project if your team wants them committed; just pick one and stay consistent. (`/claude-session-rhythm:docs:init`'s solo-vs-parallel-agent question handles `HANDOFF.md` specifically, since it's the one file whose role flips between the two modes.)
 - **One lesson = one entry.** Don't pile three unrelated takeaways into one timestamp. Future-you scans by date+headline.
 - **Capture the *why* of a decision, not the *what*.** The diff already shows the what. ADR entries that skip the alternatives-considered and tradeoffs sections are worth less than nothing.
-- **Failed approaches go in the handoff, loudly.** The most expensive context loss is re-trying something that already didn't work. `/handoff:create` always asks about this section.
+- **Failed approaches go in the handoff, loudly.** The most expensive context loss is re-trying something that already didn't work. `/claude-session-rhythm:handoff:create` always asks about this section.
 - **Skills are proactive.** They offer at the right moments. Don't suppress them — that's the whole point.
 
 ## Project conventions (for contributors)
 
 - Plugin files live under `plugins/claude-session-rhythm/` — the canonical Anthropic marketplace layout (cf. `agent-sdk-dev`). The marketplace manifest stays at the repo root (`.claude-plugin/marketplace.json`); the plugin manifest is `plugins/claude-session-rhythm/.claude-plugin/plugin.json`.
 - Skill names: kebab-case, matching the folder name. Each skill lives in `plugins/claude-session-rhythm/skills/<name>/SKILL.md`.
-- Command namespaces: match the folder name. `plugins/claude-session-rhythm/commands/session/start.md` → `/session:start`.
+- Command namespaces: match the folder name. `plugins/claude-session-rhythm/commands/session/start.md` → `/claude-session-rhythm:session:start`.
 - Skill `description:` frontmatter shows up in Claude Code autocomplete — keep it specific and concrete.
 - Slash commands are intentionally thin — most logic lives in the skill they invoke.
 

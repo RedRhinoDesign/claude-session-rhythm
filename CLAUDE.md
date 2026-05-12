@@ -27,11 +27,11 @@ For local development, point the marketplace at a clone:
 /plugin install claude-session-rhythm
 ```
 
-Copy-pasting `plugins/claude-session-rhythm/skills/` and `plugins/claude-session-rhythm/commands/` contents into `~/.claude/` still works, but is not the recommended path — `/session:guide` assumes marketplace-style installation when classifying plugin vs. personal skills (see `GOTCHAS.md`).
+Copy-pasting `plugins/claude-session-rhythm/skills/` and `plugins/claude-session-rhythm/commands/` contents into `~/.claude/` still works, but is not the recommended path — `/claude-session-rhythm:session:guide` assumes marketplace-style installation when classifying plugin vs. personal skills (see `GOTCHAS.md`).
 
 ## Conventions
 
 - Skill names: kebab-case, matching the folder name
-- Command namespaces: match the folder name (e.g., `plugins/claude-session-rhythm/commands/session/start.md` → `/session:start`)
+- Command namespaces: match the folder name (e.g., `plugins/claude-session-rhythm/commands/session/start.md` → `/claude-session-rhythm:session:start`)
 - Skill `description:` frontmatter appears in Claude Code autocomplete — keep it specific and under 200 characters
 - See GOTCHAS.md if something isn't triggering as expected
