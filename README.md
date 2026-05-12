@@ -37,7 +37,7 @@ Or, while developing locally, point the marketplace at a clone:
 
 That's it. Restart Claude Code if a slash command doesn't appear in autocomplete immediately.
 
-> **Note:** copy-pasting the `skills/` and `commands/` folders into `~/.claude/` also works, but the marketplace install is the recommended path. `/session:guide` assumes marketplace-style installation when categorizing plugin vs. personal skills — see `GOTCHAS.md` for the edge case.
+> **Note:** copy-pasting the `plugins/claude-session-rhythm/skills/` and `plugins/claude-session-rhythm/commands/` folders into `~/.claude/` also works, but the marketplace install is the recommended path. `/session:guide` assumes marketplace-style installation when categorizing plugin vs. personal skills — see `GOTCHAS.md` for the edge case.
 
 ## Slash commands
 
@@ -207,16 +207,17 @@ A few choices that are deliberate, not accidental:
 
 ## Project conventions (for contributors)
 
-- Skill names: kebab-case, matching the folder name. Each skill lives in `skills/<name>/SKILL.md`.
-- Command namespaces: match the folder name. `commands/session/start.md` → `/session:start`.
+- Plugin files live under `plugins/claude-session-rhythm/` — the canonical Anthropic marketplace layout (cf. `agent-sdk-dev`). The marketplace manifest stays at the repo root (`.claude-plugin/marketplace.json`); the plugin manifest is `plugins/claude-session-rhythm/.claude-plugin/plugin.json`.
+- Skill names: kebab-case, matching the folder name. Each skill lives in `plugins/claude-session-rhythm/skills/<name>/SKILL.md`.
+- Command namespaces: match the folder name. `plugins/claude-session-rhythm/commands/session/start.md` → `/session:start`.
 - Skill `description:` frontmatter shows up in Claude Code autocomplete — keep it specific and concrete.
 - Slash commands are intentionally thin — most logic lives in the skill they invoke.
 
-The plugin manifest at `.claude-plugin/plugin.json` is spec-pure metadata-only — it does *not* enumerate skill or command names. Skills and commands are auto-discovered from their folders. If you add or remove a command, you don't need to touch the manifest.
+The plugin manifest at `plugins/claude-session-rhythm/.claude-plugin/plugin.json` is spec-pure metadata-only — it does *not* enumerate skill or command names. Skills and commands are auto-discovered from their folders. If you add or remove a command, you don't need to touch the manifest.
 
 ## Compatibility
 
-Tested on Claude Code (CLI). The plugin uses only standard plugin features (`skills/`, `commands/`, and `.claude-plugin/plugin.json`) — no platform-specific assumptions.
+Tested on Claude Code (CLI). The plugin uses only standard plugin features (`skills/`, `commands/`, and `.claude-plugin/plugin.json` inside its plugin subdirectory) — no platform-specific assumptions.
 
 ## License
 
