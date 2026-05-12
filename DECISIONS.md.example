@@ -1,0 +1,37 @@
+# Decisions
+
+Lightweight ADR (Architecture Decision Record). Captures the WHY behind choices that are hard to reverse. Newest at the top.
+
+---
+
+## 2026-05-10 — Use Supabase over a custom Postgres setup
+
+**Context:** The app needs user auth and a relational database. Options ranged from fully managed (Supabase) to self-hosted Postgres on the VPS.
+
+**Decision:** Use Supabase. Auth, storage, and DB in one service; no ops overhead during early development.
+
+**Alternatives considered:**
+- Self-hosted Postgres — rejected: too much ops work before product is validated
+- Firebase — rejected: NoSQL is a bad fit for relational data model
+
+**Tradeoffs:** Vendor dependency and row-level pricing at scale. Acceptable for MVP — revisit if monthly cost exceeds $50.
+
+**Revisit if:** App scales past 10k rows or Supabase pricing becomes a blocker.
+
+---
+
+## 2026-05-05 — Route AI features through OpenRouter, not direct API
+
+**Context:** The app needs an LLM for a user-facing suggestion feature. Direct Anthropic API works but costs add up quickly for a beta product.
+
+**Decision:** Route through OpenRouter, defaulting to a cost-efficient model with fallback to Claude Haiku for low-confidence cases.
+
+**Alternatives considered:**
+- Direct Anthropic API only — rejected: ~10x more expensive at current usage
+- Self-hosted model on VPS — rejected: GPU cost exceeds token savings at this volume
+
+**Tradeoffs:** Slightly higher latency, slightly less consistent quality. Acceptable for beta.
+
+**Revisit if:** Daily token spend exceeds $20/day OR users report quality issues.
+
+---

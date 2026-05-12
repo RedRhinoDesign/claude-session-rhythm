@@ -1,0 +1,17 @@
+# Lessons Learned
+
+Non-obvious things discovered while building this project. Newest at the top.
+
+---
+
+*2026-05-08* — Vercel env vars don't hot-reload in local dev
+
+Spent 40 minutes wondering why a newly added `DATABASE_URL` wasn't being picked up. Turns out `vercel dev` caches env vars at startup — you have to restart the dev server after editing `.env.local`. The browser's auto-reload made it look like everything was refreshing, but the server process wasn't.
+
+---
+
+*2026-05-05* — Sandbox a scaffolding tool before releasing it
+
+Ran the `pm-docs-init` skill against a fresh empty project before shipping it. That dry-run immediately exposed a design question (should `HANDOFF.md` be committed or gitignored?) that would have shipped as a silent wrong default for half the audience. Without the sandbox, the tension stays invisible until a real user hits it.
+
+---

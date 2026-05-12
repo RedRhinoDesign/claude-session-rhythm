@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Doc bundle (personal dev notes — not for public release)
+HANDOFF.md
+SESSION_LOG.md
+BACKLOG.md
+DECISIONS.md
+LESSONS.md
+GOTCHAS.md
