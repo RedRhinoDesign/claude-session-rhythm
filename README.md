@@ -52,7 +52,8 @@ All commands are namespaced. Type `/` in Claude Code and they'll autocomplete wi
 | `/claude-session-rhythm:handoff:create` | Write a full `HANDOFF.md` snapshot for a real context switch. |
 | `/claude-session-rhythm:handoff:quick` | Five-line `HANDOFF.md` for a small wrap (<30 min away). |
 | `/claude-session-rhythm:handoff:resume` | Read `HANDOFF.md`, drift-check, and orient for continued work. |
-| `/claude-session-rhythm:lessons:add` | Append a timestamped lesson to `LESSONS.md`. |
+| `/claude-session-rhythm:lessons:add` | Append a timestamped lesson to `LESSONS.md`. Prompts for project-local vs. global (`~/.claude/LESSONS.md`) scope; prefix the text with `project:` or `global:` to skip the prompt. |
+| `/claude-session-rhythm:gotchas:add` | Append a timestamped gotcha (symptom + fix) to project `GOTCHAS.md`. |
 | `/claude-session-rhythm:decision:add` | Append a lightweight ADR entry to `DECISIONS.md`. |
 | `/claude-session-rhythm:docs:init` | Scaffold the Session Rhythm doc bundle in this project — `LESSONS.md`, `SESSION_LOG.md`, `HANDOFF.md`, `DECISIONS.md`, `BACKLOG.md`, `GOTCHAS.md`, and a project-level `CLAUDE.md` if missing. Confirms before writing; never overwrites. |
 | `/claude-session-rhythm:docs:audit` | Audit doc-bundle coverage across a directory of projects — shows which of the seven standard docs each project has and what's missing. Read-only. |
@@ -67,7 +68,9 @@ The commands above are thin wrappers around skills. The skills also trigger proa
 | `session-resume` | Catch me up — what was I doing last time? |
 | `handoff` | Write `HANDOFF.md` before a real break or parallel-agent spawn. |
 | `handoff-resume` | Read `HANDOFF.md` and re-orient cleanly. |
-| `lessons-add` | Capture a lesson learned the moment it lands. |
+| `lessons-add` | Capture a lesson — prompts for project-local vs. global scope; routes to `./LESSONS.md` or `~/.claude/LESSONS.md`. |
+| `lessons-recall` | Consult `~/.claude/LESSONS.md` on demand when a cross-project pattern might apply (read-only). |
+| `gotchas-add` | Capture a gotcha — symptom + fix — to project `GOTCHAS.md`. |
 | `decision-record` | Capture the *why* of a structural choice. |
 | `docs-init` | Scaffold the seven-file doc bundle (`CLAUDE`, `LESSONS`, `SESSION_LOG`, `HANDOFF`, `DECISIONS`, `BACKLOG`, `GOTCHAS`) in a new or existing project. |
 
@@ -101,8 +104,12 @@ If you want to drive it explicitly:
 
 ```text
 /claude-session-rhythm:lessons:add "vercel env vars don't hot-reload — restart dev server after editing .env.local"
+/claude-session-rhythm:lessons:add "global: don't trust documented intent; verify current file state before planning"
+/claude-session-rhythm:gotchas:add "if you see /plugin update produce no output in the install session — the cache is in-memory; restart Claude Code"
 /claude-session-rhythm:decision:add
 ```
+
+`lessons:add` prompts for project-local vs. global scope at capture time; prefix the text with `project:` or `global:` to skip the prompt. The global file (`~/.claude/LESSONS.md`) is consulted on demand by the `lessons-recall` skill — Claude reaches for it when a cross-project pattern might apply, so it stays out of every session's context by default.
 
 ### Before a break, context switch, or Conductor worktree
 

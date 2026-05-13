@@ -1,6 +1,6 @@
 # claude-session-rhythm
 
-A Claude Code plugin providing 7 session management skills and slash commands for maintaining project rhythm across sessions, context switches, and parallel agents.
+A Claude Code plugin providing 9 session management skills and slash commands for maintaining project rhythm across sessions, context switches, and parallel agents.
 
 ## Structure
 
@@ -9,7 +9,7 @@ This repo is both a marketplace and a single-plugin catalog (canonical Anthropic
 - `.claude-plugin/marketplace.json` — marketplace manifest (root). Points at the plugin via `"source": "./plugins/claude-session-rhythm"`.
 - `plugins/claude-session-rhythm/.claude-plugin/plugin.json` — plugin manifest
 - `plugins/claude-session-rhythm/skills/` — one folder per skill, each containing a `SKILL.md`
-- `plugins/claude-session-rhythm/commands/` — slash commands organized by namespace (`session/`, `handoff/`, `lessons/`, `decision/`, `docs/`)
+- `plugins/claude-session-rhythm/commands/` — slash commands organized by namespace (`session/`, `handoff/`, `lessons/`, `gotchas/`, `decision/`, `docs/`)
 
 ## Install
 
