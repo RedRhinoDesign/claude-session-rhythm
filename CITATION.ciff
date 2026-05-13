@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: claude-session-rhythm
+message: "If you use this project, please cite it as below."
+type: software
+authors:
+  - family-names: Joye
+    given-names: Caleb
+    alias: RedRhinoDesign
+license: MIT
+version: 1.1.0
+date-released: "2026-05-13"
+url: "https://github.com/RedRhinoDesign/claude-session-rhythm"
+repository-code: "https://github.com/RedRhinoDesign/claude-session-rhythm"
+abstract: "A Claude Code plugin for maintaining project rhythm across sessions,
+  context switches, and parallel agents — using a small set of living docs
+  (HANDOFF.md, SESSION_LOG.md, LESSONS.md, DECISIONS.md, GOTCHAS.md,
+  BACKLOG.md) and the skills + slash commands that maintain them."
